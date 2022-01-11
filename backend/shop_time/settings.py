@@ -42,10 +42,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'djoser',
+    'social_django',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+    'user',
 ]
 
 MIDDLEWARE = [
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -69,6 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -85,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'shop_time',
         'USER': 'postgres',
-        'PASSWORD': 'password123',
+        'PASSWORD': 'mukyman',
         'HOST': 'localhost'
     }
 }
@@ -93,8 +99,8 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'johndoe1357933@gmail.com'
-EMAIL_HOST_PASSWORD = 'omjdxxwxtvgfjoig'
+EMAIL_HOST_USER = 'shoptime125@gmail.com'
+EMAIL_HOST_PASSWORD = 'nfminodrbmmvxtqj'
 EMAIL_USE_TLS = True
 
 
@@ -152,6 +158,12 @@ REST_FRAMEWORK = {
     ),
 }
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES' : ('JWT', ),
     'ACCESS_TOKEN_LIFETIME' : timedelta(minutes=60),
@@ -170,9 +182,12 @@ DJOSER = {
     'SET_USERNAME_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
+    'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:8000/google', 'http://localhost:8000/facebook'],
     'SERIALIZERS': {
         'user_create': 'user.serializers.UserCreateSerializer',
         'user': 'user.serializers.UserCreateSerializer',
@@ -181,6 +196,23 @@ DJOSER = {
 
     }
 } 
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '225197140918-bsu1vj4cabh3na9a6057ul3qbhq22m04.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'openid'
+]
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
+
+SOCIAL_AUTH_FACEBOOK_KEY = '896851874358406'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'eee634aa329359b2f954cd54d8241749'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'email, first_name, last_name'
+}
+
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
