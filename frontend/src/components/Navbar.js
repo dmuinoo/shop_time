@@ -1,12 +1,49 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { logout } from "../actions/auth";
+import { get_categories } from "../actions/categories";
+import { get_search_products } from "../actions/products";
 import { Link, NavLink } from "react-router-dom";
 import Alert from "./Alert";
+import SearchBox from "./SearchBox";
 
-const Navbar = ({ isAuthenticated, logout }) => {
+const Navbar = ({
+  isAuthenticated,
+  logout,
+  categories,
+  get_categories,
+  get_search_products,
+  searchRedirect,
+  setSearchRedirect,
+}) => {
+  const [render, setRender] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [formData, setFormData] = useState({
+    category_id: 0,
+    search: "",
+  });
+
+  const { category_id, search } = formData;
+
+  useEffect(() => {
+    get_categories();
+  }, []);
+
+  useEffect(() => {
+    setSearchRedirect(false);
+  }, [render]);
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    get_search_products(search, category_id);
+    setSearchRedirect(true);
+    setRender(!render);
+  };
 
   const logoutHandler = () => {
     logout();
@@ -15,7 +52,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
 
   const authLinks = (
     <li className="nav-item">
-      <a className="nav-link" onClick={logoutHandler} href="#!">
+      <a className="nav-link mt-1" onClick={logoutHandler} href="#!">
         Logout
       </a>
     </li>
@@ -24,12 +61,12 @@ const Navbar = ({ isAuthenticated, logout }) => {
   const guestLinks = (
     <Fragment>
       <li className="nav-item">
-        <NavLink className="nav-link" to="/login">
+        <NavLink className="nav-link mt-1" to="/login">
           Login
         </NavLink>
       </li>
       <li className="nav-item">
-        <NavLink className="nav-link" to="/signup">
+        <NavLink className="nav-link mt-1" to="/signup">
           Sign Up
         </NavLink>
       </li>
@@ -55,12 +92,18 @@ const Navbar = ({ isAuthenticated, logout }) => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <NavLink className="nav-link" exact to="/">
+            <NavLink className="nav-link mt-1" exact to="/">
               Home
             </NavLink>
           </li>
+          <SearchBox
+            search={search}
+            onChange={onChange}
+            onSubmit={onSubmit}
+            categories={categories}
+          />
           <li className="nav-item">
-            <NavLink className="nav-link" to="/shop">
+            <NavLink className="nav-link mt-1" to="/shop">
               Shop
             </NavLink>
           </li>
@@ -94,8 +137,11 @@ const Navbar = ({ isAuthenticated, logout }) => {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  categories: state.categories.categories,
 });
 
 export default connect(mapStateToProps, {
   logout,
+  get_categories,
+  get_search_products,
 })(Navbar);
