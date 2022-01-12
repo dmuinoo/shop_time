@@ -1,5 +1,9 @@
-import React from "react";
+import React from 'react';
 
-const dashboard = () => <div>Dashbaord</div>;
+const dashboard = () => (
+    <div>
+        Dashbaord
+    </div>
+);
 
 export default dashboard;
