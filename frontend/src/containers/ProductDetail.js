@@ -1,6 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { get_product, get_related_products } from "../actions/products";
+import {
+  add_item,
+  get_items,
+  get_total,
+  get_item_total,
+} from "../actions/cart";
 import Card from "../components/Card";
 import ProductDetailCard from "../components/ProductDetailCard";
 
@@ -10,7 +17,13 @@ const ProductDetail = ({
   get_product,
   related_products,
   get_related_products,
+  add_item,
+  get_items,
+  get_total,
+  get_item_total,
 }) => {
+  const [redirect, setRedirect] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const productId = match.params.id;
@@ -28,15 +41,31 @@ const ProductDetail = ({
     ) {
       return related_products.map((product, index) => (
         <div key={index} className="col-4">
-          <Card product={product} />
+          <Card
+            product={product}
+            add_item={add_item}
+            get_items={get_items}
+            get_total={get_total}
+            get_item_total={get_item_total}
+            setRedirect={setRedirect}
+          />
         </div>
       ));
     }
   };
 
+  if (redirect) return <Redirect to="/cart-or-continue-shopping" />;
+
   return (
     <div className="container mt-5">
-      <ProductDetailCard product={product} />
+      <ProductDetailCard
+        product={product}
+        add_item={add_item}
+        get_items={get_items}
+        get_total={get_total}
+        get_item_total={get_item_total}
+        setRedirect={setRedirect}
+      />
 
       <hr />
 
@@ -56,4 +85,8 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   get_product,
   get_related_products,
+  add_item,
+  get_items,
+  get_total,
+  get_item_total,
 })(ProductDetail);

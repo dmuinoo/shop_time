@@ -12,9 +12,9 @@ const Navbar = ({
   isAuthenticated,
   logout,
   categories,
+  total_items,
   get_categories,
   get_search_products,
-  searchRedirect,
   setSearchRedirect,
 }) => {
   const [render, setRender] = useState(false);
@@ -107,6 +107,25 @@ const Navbar = ({
               Shop
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link mt-1" to="/cart">
+              Cart{" "}
+              <sup>
+                <small
+                  style={{
+                    borderRadius: "50%",
+                    padding: "2px",
+                    fontSize: "12px",
+                    fontStyle: "italic",
+                    backgroundColor: "#777",
+                    color: "#fff",
+                  }}
+                >
+                  {total_items}
+                </small>
+              </sup>
+            </NavLink>
+          </li>
           {isAuthenticated ? authLinks : guestLinks}
         </ul>
       </div>
@@ -138,6 +157,7 @@ const Navbar = ({
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   categories: state.categories.categories,
+  total_items: state.cart.total_items,
 });
 
 export default connect(mapStateToProps, {

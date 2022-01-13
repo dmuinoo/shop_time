@@ -2,7 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 
-const landingPage = ({ products_arrival, products_sold }) => (
+const landingPage = ({
+  products_arrival,
+  products_sold,
+  add_item,
+  get_items,
+  get_total,
+  get_item_total,
+  setRedirect,
+}) => (
   <div className="container">
     <div className="jumbotron mt-5">
       <h1 className="display-4">Welcome to Shop Time!</h1>
@@ -22,7 +30,14 @@ const landingPage = ({ products_arrival, products_sold }) => (
           products_arrival !== undefined &&
           products_arrival.map((product, index) => (
             <div key={index} className="col-4">
-              <Card product={product} />
+              <Card
+                product={product}
+                add_item={add_item}
+                get_items={get_items}
+                get_total={get_total}
+                get_item_total={get_item_total}
+                setRedirect={setRedirect}
+              />
             </div>
           ))}
       </div>
@@ -36,7 +51,14 @@ const landingPage = ({ products_arrival, products_sold }) => (
           products_sold !== undefined &&
           products_sold.map((product, index) => (
             <div key={index} className="col-4">
-              <Card product={product} />
+              <Card
+                product={product}
+                add_item={add_item}
+                get_items={get_items}
+                get_total={get_total}
+                get_item_total={get_item_total}
+                setRedirect={setRedirect}
+              />
             </div>
           ))}
       </div>
