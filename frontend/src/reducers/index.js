@@ -4,6 +4,7 @@ import alert from "./alert";
 import cart from "./cart";
 import categories from "./categories";
 import products from "./products";
+import shipping from "./shipping";
 
 export default combineReducers({
   auth,
@@ -11,4 +12,5 @@ export default combineReducers({
   cart,
   categories,
   products,
+  shipping,
 });
