@@ -2,6 +2,11 @@ import axios from "axios";
 import { setAlert } from "./alert";
 import { get_items, get_total, get_item_total, synch_cart } from "./cart";
 import {
+  get_wishlist_items,
+  get_wishlist_item_total,
+  clear_wishlist,
+} from "./wishlist";
+import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
   LOGIN_SUCCESS,
@@ -198,6 +203,8 @@ export const login = (email, password) => async (dispatch) => {
       });
       dispatch(setAlert("Logged in successfully", "success"));
       dispatch(synch_cart());
+      dispatch(get_wishlist_items());
+      dispatch(get_wishlist_item_total());
     } else {
       dispatch({
         type: LOGIN_FAIL,
@@ -259,6 +266,8 @@ export const google_authenticate = (state, code) => async (dispatch) => {
         });
         dispatch(setAlert("Logged in successfully", "success"));
         dispatch(synch_cart());
+        dispatch(get_wishlist_items());
+        dispatch(get_wishlist_item_total());
       } else {
         dispatch({
           type: GOOGLE_AUTH_FAIL,
@@ -321,6 +330,8 @@ export const facebook_authenticate = (state, code) => async (dispatch) => {
         });
         dispatch(setAlert("Logged in successfully", "success"));
         dispatch(synch_cart());
+        dispatch(get_wishlist_items());
+        dispatch(get_wishlist_item_total());
       } else {
         dispatch({
           type: FACEBOOK_AUTH_FAIL,
@@ -553,4 +564,5 @@ export const logout = () => (dispatch) => {
   dispatch(get_items());
   dispatch(get_item_total());
   dispatch(get_total());
+  dispatch(clear_wishlist());
 };

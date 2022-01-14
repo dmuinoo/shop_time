@@ -8,6 +8,12 @@ import {
   get_total,
   get_item_total,
 } from "../actions/cart";
+import {
+  get_wishlist_items,
+  get_wishlist_item_total,
+  add_wishlist_item,
+  remove_wishlist_item,
+} from "../actions/wishlist";
 import { get_categories } from "../actions/categories";
 import Card from "../components/Card";
 import ShopForm from "../components/ShopForm";
@@ -23,7 +29,14 @@ const Shop = ({
   get_items,
   get_total,
   get_item_total,
+  wishlist,
+  get_wishlist_items,
+  get_wishlist_item_total,
+  add_wishlist_item,
+  remove_wishlist_item,
+  isAuthenticated,
 }) => {
+  const [loginRedirect, setLoginRedirect] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [filtered, setFiltered] = useState(false);
   const [formData, setFormData] = useState({
@@ -71,6 +84,13 @@ const Shop = ({
               get_items={get_items}
               get_total={get_total}
               get_item_total={get_item_total}
+              wishlist={wishlist}
+              get_wishlist_items={get_wishlist_items}
+              get_wishlist_item_total={get_wishlist_item_total}
+              add_wishlist_item={add_wishlist_item}
+              remove_wishlist_item={remove_wishlist_item}
+              isAuthenticated={isAuthenticated}
+              setLoginRedirect={setLoginRedirect}
               setRedirect={setRedirect}
             />
           </div>
@@ -91,6 +111,13 @@ const Shop = ({
               get_items={get_items}
               get_total={get_total}
               get_item_total={get_item_total}
+              wishlist={wishlist}
+              get_wishlist_items={get_wishlist_items}
+              get_wishlist_item_total={get_wishlist_item_total}
+              add_wishlist_item={add_wishlist_item}
+              remove_wishlist_item={remove_wishlist_item}
+              isAuthenticated={isAuthenticated}
+              setLoginRedirect={setLoginRedirect}
               setRedirect={setRedirect}
             />
           </div>
@@ -111,6 +138,7 @@ const Shop = ({
     return results;
   };
 
+  if (loginRedirect) return <Redirect to="/login" />;
   if (redirect) return <Redirect to="/cart-or-continue-shopping" />;
 
   return (
@@ -139,6 +167,8 @@ const mapStateToProps = (state) => ({
   categories: state.categories.categories,
   products: state.products.products,
   filtered_products: state.products.filtered_products,
+  wishlist: state.wishlist.items,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, {
@@ -149,4 +179,8 @@ export default connect(mapStateToProps, {
   get_items,
   get_total,
   get_item_total,
+  get_wishlist_items,
+  get_wishlist_item_total,
+  add_wishlist_item,
+  remove_wishlist_item,
 })(Shop);

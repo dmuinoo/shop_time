@@ -171,7 +171,7 @@ class ListRelatedView(APIView):
                 # If this parent category does not have any children categories
                 # then just filter by the category itself
                 if not Category.objects.filter(parent=category).exists():
-                    related_products = Product.objects.order_by(
+                    related_products = related_products.order_by(
                         '-sold'
                     ).filter(category=category)
                 # If this parent category has children, filter by both the parent category and it's children

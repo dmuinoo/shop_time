@@ -10,10 +10,15 @@ urlpatterns = [
     path('auth/', include('djoser.social.urls')),
     path('api/cart/', include('cart.urls')),
     path('api/category/', include('category.urls')),
+    path('api/coupon/', include('coupons.urls')),
     path('api/products/', include('product.urls')),
     path('api/shipping/', include('shipping.urls')),
     path('api/order/', include('orders.urls')),
+    path('api/payment/', include('payment.urls')),
     path('api/user/', include('user.urls')),
+    path('api/profile/', include('user_profile.urls')),
+    path('api/wishlist/', include('wishlist.urls')),
+    path('api/reviews/', include('reviews.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

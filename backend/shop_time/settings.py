@@ -47,10 +47,15 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'user',
     'category',
+    'coupons',
     'product',
     'cart',
     'shipping',
+    'payment',
     'orders',
+    'user_profile',
+    'wishlist',
+    'reviews',
 ]
 
 MIDDLEWARE = [
@@ -201,6 +206,11 @@ DJOSER = {
 
     }
 } 
+BT_ENVIRONMENT = 'sandbox'
+BT_MERCHANT_ID = 'gdqpzcdmy9rdfhfg'
+BT_PUBLIC_KEY = '9yymyhd7dzs673fz'
+BT_PRIVATE_KEY = '083dce5ae12e551084cbec5cc1587aa7'
+
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '225197140918-bsu1vj4cabh3na9a6057ul3qbhq22m04.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
