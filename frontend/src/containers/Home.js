@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -49,22 +50,33 @@ const Home = ({
   if (redirect) return <Redirect to="/cart-or-continue-shopping" />;
 
   return (
-    <LandingPage
-      products_arrival={products_arrival}
-      products_sold={products_sold}
-      add_item={add_item}
-      get_items={get_items}
-      get_total={get_total}
-      get_item_total={get_item_total}
-      wishlist={wishlist}
-      get_wishlist_items={get_wishlist_items}
-      get_wishlist_item_total={get_wishlist_item_total}
-      add_wishlist_item={add_wishlist_item}
-      remove_wishlist_item={remove_wishlist_item}
-      isAuthenticated={isAuthenticated}
-      setLoginRedirect={setLoginRedirect}
-      setRedirect={setRedirect}
-    />
+    <Fragment>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta
+          name="description"
+          content="Aplicacion para amantes de los vinos"
+        />
+        <title>Shop Time | Home</title>
+        {/*<link rel="canonical" href="http://mysite.com/activate" /> */}
+      </Helmet>
+      <LandingPage
+        products_arrival={products_arrival}
+        products_sold={products_sold}
+        add_item={add_item}
+        get_items={get_items}
+        get_total={get_total}
+        get_item_total={get_item_total}
+        wishlist={wishlist}
+        get_wishlist_items={get_wishlist_items}
+        get_wishlist_item_total={get_wishlist_item_total}
+        add_wishlist_item={add_wishlist_item}
+        remove_wishlist_item={remove_wishlist_item}
+        isAuthenticated={isAuthenticated}
+        setLoginRedirect={setLoginRedirect}
+        setRedirect={setRedirect}
+      />
+    </Fragment>
   );
 };
 

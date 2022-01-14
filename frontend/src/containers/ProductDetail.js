@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { get_product, get_related_products } from "../actions/products";
@@ -136,7 +137,6 @@ const ProductDetail = ({
     const fetchData = async () => {
       await delete_review(productId);
       await get_review(productId);
-      setRating(5.0);
       setFormData({
         comment: "",
       });
@@ -236,6 +236,27 @@ const ProductDetail = ({
 
   return (
     <div className="container mt-5">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta
+          name="description"
+          content="Aplicacion para amantes de los vinos"
+        />
+        <title>
+          Shop Time | Product Detail -
+          {`${
+            product &&
+            product !== null &&
+            product !== undefined &&
+            product.name &&
+            product.name !== null &&
+            product.name !== undefined
+              ? product.name
+              : ""
+          }`}
+        </title>
+        {/*<link rel="canonical" href="http://mysite.com/activate" /> */}
+      </Helmet>
       <ProductDetailCard
         product={product}
         add_item={add_item}

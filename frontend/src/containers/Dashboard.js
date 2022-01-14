@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { get_items, get_total, get_item_total } from "../actions/cart";
@@ -244,6 +245,15 @@ const Dashboard = ({
 
   return (
     <div className="container mt-5">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta
+          name="description"
+          content="Aplicacion para amantes de los vinos"
+        />
+        <title>Shop Time | Dashboard</title>
+        {/*<link rel="canonical" href="http://mysite.com/activate" /> */}
+      </Helmet>
       <div className="row">
         <div className="col-3">
           <div className="card">

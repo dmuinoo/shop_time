@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { check_coupon } from "../actions/coupons";
@@ -350,6 +351,15 @@ const Checkout = ({
 
   return (
     <div className="container mt-5 mb-5">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta
+          name="description"
+          content="Aplicacion para amantes de los vinos"
+        />
+        <title>Shop Time | Checkout</title>
+        {/*<link rel="canonical" href="http://mysite.com/activate" /> */}
+      </Helmet>
       <div className="row">
         <div className="col-7">
           {showItems()}

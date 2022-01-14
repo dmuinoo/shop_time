@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -43,6 +44,15 @@ const WishList = ({
 
   return (
     <div className="container mt-5">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta
+          name="description"
+          content="Aplicacion para amantes de los vinos"
+        />
+        <title>Shop Time | Wishlist</title>
+        {/*<link rel="canonical" href="http://mysite.com/activate" /> */}
+      </Helmet>
       <h2>Your Items:</h2>
       <h4 className="text-muted mt-3">
         Your wishlist has {total_items} item(s)

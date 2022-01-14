@@ -230,7 +230,7 @@ class ProcessPaymentView(APIView):
 
                 if discount_percentage > 1 and discount_percentage < 100:
                     total_amount -= (total_amount *
-                                        (discount_percentage / 100))
+                                     (discount_percentage / 100))
 
         # Add tax to total (can add tax after shipping if e-commerce store is applying tax in that way)
         total_amount += (total_amount * tax)
@@ -264,7 +264,7 @@ class ProcessPaymentView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-        if newTransaction.is_success or newTransaction.transaction:
+        if newTransaction.is_success and newTransaction.transaction:
             for cart_item in cart_items:
                 # Get product object to update
                 update_product = Product.objects.get(id=cart_item.product.id)
@@ -321,6 +321,17 @@ class ProcessPaymentView(APIView):
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR
                     )
 
+            order_items = OrderItem.objects.filter(order=order)
+            order_item_text = '\n\nOrder Item Details:'
+            order_item_count = 1
+
+            for order_item in order_items:
+                order_item_text += '\n\nOrder Item ' + str(order_item_count) + ':'
+                order_item_text += '\nOrder Item Name: ' + str(order_item.name)
+                order_item_text += '\nOrder Item Price: $' + str(order_item.price)
+                order_item_text += '\nOrder Item Count: ' + str(order_item.count)
+                order_item_count +=1
+
             try:
                 send_mail(
                     'Your Order Details',
@@ -328,10 +339,59 @@ class ProcessPaymentView(APIView):
                     + '\n\nWe recieved your order!'
                     + '\n\nGive us some time to process your order and ship it out to you.'
                     + '\n\nYou can go on your user dashboard to check the status of your order.'
+                    + '\n\nHere are the details of your order:'
+                    + '\nOrder Transaction ID: ' + str(newTransaction.transaction.id)
+                    + '\nOrder Total: $' + str(total_amount)
+                    + '\nCoupon Used: ' + str(coupon_name)
+                    + '\n\nShipping Details:'
+                    + '\nAddress Line 1: ' + address_line_1
+                    + '\nAddress Line 2: ' + address_line_2
+                    + '\nCity: ' + city
+                    + '\nState/Province/Region: ' + state_province_region
+                    + '\nPostal/Zip Code: ' + postal_zip_code
+                    + '\nCountry/Region: ' + country_region
+                    + '\n\nPhone number: ' + telephone_number
+                    + '\n\nShipping Option Details: '
+                    + '\nShipping Name: ' + shipping_name
+                    + '\nShipping Price: $' + str(shipping_price)
+                    + order_item_text
                     + '\n\nSincerely,'
                     + '\nShop Time',
                     'shoptime125@gmail.com',
                     [user.email],
+                    fail_silently=False
+                )
+            except:
+                return Response(
+                    {'error': 'Transaction succeeded and order created, but failed to send email'},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
+            try:
+                send_mail(
+                    'An Order Was Created',
+                    'Hi, you are receiving this notification because an order was made on your website.'
+                    + '\n\nOrder Details of the user that made the order are the following:'
+                    + '\n\nFull Name: ' + full_name
+                    + '\nEmail: ' + user.email
+                    + '\nOrder Transaction ID: ' + str(newTransaction.transaction.id)
+                    + '\nOrder Total: $' + str(total_amount)
+                    + '\nCoupon Used: ' + str(coupon_name)
+                    + '\n\nShipping Details:'
+                    + '\nAddress Line 1: ' + address_line_1
+                    + '\nAddress Line 2: ' + address_line_2
+                    + '\nCity: ' + city
+                    + '\nState/Province/Region: ' + state_province_region
+                    + '\nPostal/Zip Code: ' + postal_zip_code
+                    + '\nCountry/Region: ' + country_region
+                    + '\n\nPhone number: ' + telephone_number
+                    + '\n\nShipping Option Details: '
+                    + '\nShipping Name: ' + shipping_name
+                    + '\nShipping Price: $' + str(shipping_price)
+                    + order_item_text
+                    + '\nShop Time',
+                    'shoptime125@gmail.com',
+                    [shoptime125@gmail.com],
                     fail_silently=False
                 )
             except:

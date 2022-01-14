@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { get_products, get_filtered_products } from "../actions/products";
@@ -143,6 +144,15 @@ const Shop = ({
 
   return (
     <div className="container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta
+          name="description"
+          content="Aplicacion para amantes de los vinos"
+        />
+        <title>Shop Time | Shop</title>
+        {/*<link rel="canonical" href="http://mysite.com/activate" /> */}
+      </Helmet>
       <div className="jumbotron mt-5">
         <h1 className="display-4">Shop Page</h1>
         <p className="lead">Check out our amazing selection of products!</p>

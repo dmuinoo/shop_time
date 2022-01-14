@@ -40,7 +40,10 @@ class GetProductReviewsView(APIView):
                     item['rating'] = review.rating
                     item['comment'] = review.comment
                     item['date_created'] = review.date_created
-                    item['user'] = review.user.first_name
+                    if review.user is None:
+                        item['user'] = 'Anonymous'
+                    else:
+                        item['user'] = review.user.first_name
 
                     results.append(item)
 
@@ -169,7 +172,10 @@ class CreateProductReviewView(APIView):
                     item['rating'] = review.rating
                     item['comment'] = review.comment
                     item['date_created'] = review.date_created
-                    item['user'] = review.user.first_name
+                    if review.user is None:
+                        item['user'] = 'Anonymous'
+                    else:
+                        item['user'] = review.user.first_name
 
                     results.append(item)
 
@@ -255,7 +261,10 @@ class UpdateProductReviewView(APIView):
                     item['rating'] = review.rating
                     item['comment'] = review.comment
                     item['date_created'] = review.date_created
-                    item['user'] = review.user.first_name
+                    if review.user is None:
+                        item['user'] = 'Anonymous'
+                    else:
+                        item['user'] = review.user.first_name
 
                     results.append(item)
 
@@ -307,7 +316,11 @@ class DeleteProductReviewView(APIView):
                     item['rating'] = review.rating
                     item['comment'] = review.comment
                     item['date_created'] = review.date_created
-                    item['user'] = review.user.first_name
+                    if review.user is None:
+                        item['user'] = 'Anonymous'
+                    else:
+                        item['user'] = review.user.first_name
+
 
                     results.append(item)
 
@@ -387,7 +400,10 @@ class FilterProductReviewsView(APIView):
                     item['rating'] = review.rating
                     item['comment'] = review.comment
                     item['date_created'] = review.date_created
-                    item['user'] = review.user.first_name
+                    if review.user is None:
+                        item['user'] = 'Anonymous'
+                    else:
+                        item['user'] = review.user.first_name
 
                     results.append(item)
 
