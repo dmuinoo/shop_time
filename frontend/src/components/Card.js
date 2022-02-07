@@ -91,7 +91,7 @@ const card = ({
               objectFit: "contain",
             }}
             alt="Product Visual"
-            src={`${process.env.REACT_APP_URL}${product.photo}`}
+            src={`${process.env.REACT_APP_API_URL}${product.photo}`}
           />
         </div>
         <p className="card-text mt-3" style={{ height: "140px" }}>
