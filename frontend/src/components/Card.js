@@ -80,11 +80,15 @@ const card = ({
                     style={{ 
                         height: '240px', 
                         width: '90%', 
-                        marginLeft: '5%',
-                        overflow: 'hidden' 
+                        marginLeft: '5%', 
                     }}
                 >
-                    <img className='card-img-top' alt='Product Visual' src={product.photo} />
+                    <img className='card-img-top' style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+            }} 
+            alt='Product Visual' src={`${process.env.REACT_APP_API_URL}${product.photo}`} />
                 </div>
                 <p className='card-text mt-3' style={{ height: '140px' }}>
                     {product.description.substring(0, 100)}...
