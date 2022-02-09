@@ -129,9 +129,10 @@ const CartItem = ({
         <div className="col-3">
           <div style={{ height: "100%" }}>
             <img
+              className="card-img-top"
               style={{
-                width: "100%",
-                height: "100%",
+                width: "50%",
+                height: "50%",
                 objectFit: "contain",
               }}
               alt="Product Visual"
