@@ -127,12 +127,12 @@ const CartItem = ({
     <div className="card mb-5" style={{ padding: "20px 30px" }}>
       <div className="row">
         <div className="col-3">
-          <div style={{ height: "100%" }}>
+          <div style={{ height: "100%", overflow: "hidden" }}>
             <img
               className="card-img-top"
               style={{
-                width: "50%",
-                height: "50%",
+                width: "60%",
+                height: "60%",
                 objectFit: "contain",
               }}
               alt="Product Visual"
