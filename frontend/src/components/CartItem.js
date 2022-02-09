@@ -144,8 +144,8 @@ const CartItem = ({
                                 item !== undefined &&
                                 item.product &&
                                 item.product !== null &&
-                                item.product !== undefined ?
-                                item.product.photo : ''
+                                item.product !== undefined &&
+                `${process.env.REACT_APP_API_URL}${item.product.photo}`
                             }
                         />
                     </div>
