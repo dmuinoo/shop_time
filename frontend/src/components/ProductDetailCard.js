@@ -48,7 +48,8 @@ const productDetailCard = ({
                 <div style={{ width: '80%', marginLeft: '10%', overflow: 'hidden' }}>
                     <img
                         className='mt-5'
-                        style={{ width: '100%' }}
+
+                        style={{ width: "100%", height: "100%", objectFit: "contain" }}
                         src={
                             product && 
                             product !== null && 
