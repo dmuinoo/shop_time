@@ -137,6 +137,11 @@ const CartItem = ({
                     <div style={{ height: '180px', overflow: 'hidden' }}>
                         <img
                             className='card-img-top'
+                            style={{
+                                width: "50%",
+                                height: "50%",
+                                objectFit: "contain",
+                              }}
                             alt='Product Visual'
                             src={
                                 item &&
