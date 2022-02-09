@@ -52,8 +52,8 @@ const productDetailCard = ({
                         src={
                             product && 
                             product !== null && 
-                            product !== undefined && 
-                            product.photo
+                            product !== undefined &&
+              `${process.env.REACT_APP_API_URL}${product.photo}`
                         }
                         alt='product details'
                     />
