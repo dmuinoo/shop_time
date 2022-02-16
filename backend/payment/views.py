@@ -330,7 +330,7 @@ class ProcessPaymentView(APIView):
                     + '\n\nYou can go on your user dashboard to check the status of your order.'
                     + '\n\nSincerely,'
                     + '\nShop Time',
-                    'johndoe1357933@gmail.com',
+                    'winesbierzo@gmail.com',
                     [user.email],
                     fail_silently=False
                 )

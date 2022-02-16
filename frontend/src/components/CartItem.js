@@ -127,7 +127,7 @@ const CartItem = ({
     <div className="card mb-5" style={{ padding: "20px 30px" }}>
       <div className="row">
         <div className="col-3">
-          <div style={{ height: "100%", overflow: "hidden" }}>
+          <div style={{ height: "180px", overflow: "hidden" }}>
             <img
               className="card-img-top"
               style={{
@@ -180,7 +180,6 @@ const CartItem = ({
               className="mr-2 text-muted"
               style={{ textDecoration: "line-through", fontSize: "16px" }}
             >
-              $
               {item &&
                 item !== null &&
                 item !== undefined &&
@@ -188,9 +187,9 @@ const CartItem = ({
                 item.product !== null &&
                 item.product !== undefined &&
                 item.product.compare_price}
+              €
             </span>
             <span style={{ fontSize: "18px", color: "#b12704" }}>
-              $
               {item &&
                 item !== null &&
                 item !== undefined &&
@@ -198,6 +197,7 @@ const CartItem = ({
                 item.product !== null &&
                 item.product !== undefined &&
                 item.product.price}
+              €
             </span>
           </p>
           <p className="card-text text-muted mt-5">

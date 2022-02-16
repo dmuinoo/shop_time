@@ -100,10 +100,10 @@ const card = ({
         <p className="card-text text-muted">
           <span className="mr-2">Price:</span>
           <span className="mr-3" style={{ textDecoration: "line-through" }}>
-            ${product.compare_price}
+            {product.compare_price}€
           </span>
           <span style={{ color: "#b12704", fontSize: "20px" }}>
-            ${product.price}
+            {product.price}€
           </span>
         </p>
         <p className="card-text text-muted">

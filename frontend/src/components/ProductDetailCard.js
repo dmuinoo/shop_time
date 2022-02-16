@@ -50,8 +50,9 @@ const productDetailCard = ({
   return (
     <div className="row pt-5">
       <div className="col-3">
-        <div style={{ width: "80%", marginLeft: "10%", height: "100%" }}>
+        <div style={{ width: "80%", marginLeft: "10%", overflow: "hidden" }}>
           <img
+            className="mt-5"
             style={{ width: "100%", height: "100%", objectFit: "contain" }}
             src={
               product &&
@@ -77,11 +78,11 @@ const productDetailCard = ({
       <div className="col-3">
         <div className="card" style={{ padding: "10px 20px" }}>
           <p style={{ fontSize: "24px", color: "#b12704" }}>
-            $
             {product &&
               product !== null &&
               product !== undefined &&
               product.price}
+            €
           </p>
           <p>
             {product &&
